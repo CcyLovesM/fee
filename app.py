@@ -282,7 +282,19 @@ def section_deposit(subsection: str) -> None:
         for label in EXCHANGE_RATES:
             display_df[f"{label}人民币"] = display_df[f"{label}人民币"].apply(format_cny)
         st.markdown("### 存款金额参考")
-        st.dataframe(display_df, use_container_width=True, hide_index=True)
+        st.dataframe(
+            display_df,
+            use_container_width=True,
+            hide_index=True,
+            column_config={
+                "方案": st.column_config.TextColumn("方案", width="large"),
+                "英镑金额": st.column_config.TextColumn("英镑金额", width="small"),
+                "备注": st.column_config.TextColumn("备注", width="medium"),
+                "近一年最低汇率人民币": st.column_config.TextColumn("近一年最低汇率人民币", width="medium"),
+                "近一年最高汇率人民币": st.column_config.TextColumn("近一年最高汇率人民币", width="medium"),
+                "最低最高折中价人民币": st.column_config.TextColumn("最低最高折中价人民币", width="medium"),
+            },
+        )
         st.markdown("另外，原文还提到：**西浦 2+2 的同学一般建议存 35 - 40 万人民币。**")
         show_original_text(
             "存多少钱",
